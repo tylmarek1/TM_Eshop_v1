@@ -15,5 +15,9 @@
     <ProjectReference Include="..\Shared\TM_Eshop_v1.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 
 </Project>
