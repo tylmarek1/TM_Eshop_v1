@@ -1,6 +1,4 @@
-﻿using System.Net.Http.Json;
-
-namespace TM_Eshop_v1.Client.Services.ProductService
+﻿namespace TM_Eshop_v1.Client.Services.ProductService
 {
     public class ProductService : IProductServiceInterface
     {

@@ -13,7 +13,7 @@ namespace TM_Eshop_v1.Server.Controllers
         {
             _categoryService = categoryService;
         }
-        [HttpGet]
+        [HttpGet("getallcategories")]
         public async Task<ActionResult<ServiceResponce<List<Category>>>> GetCategoriesAsync()
         {
             var result = await _categoryService.GetCategoriesAsync();
