@@ -1,6 +1,6 @@
 ﻿namespace TM_Eshop_v1.Server.Services.ProductService
 {
-    public class ProductService : ProductServiceInterface
+    public class ProductService : IProductServiceInterface
     {
         private readonly DataContext _context;
 
@@ -8,12 +8,13 @@
         {
             _context = context;
         }
-
-        public async Task<List<Product>> GetAll()
+        public async Task<ServiceResponce<List<Product>>> GetProductsAsync()
         {
-            var products = await _context.Products.ToListAsync();
-
-            return products;
+            var responce = new ServiceResponce<List<Product>> 
+            {
+                Data = await _context.Products.ToListAsync()
+            };
+            return responce;
         }
     }
 }

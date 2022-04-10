@@ -7,17 +7,18 @@ namespace TM_Eshop_v1.Server.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly ProductServiceInterface _productService;
+        private readonly IProductServiceInterface _productService;
 
-        public ProductController(ProductServiceInterface productService)
+        public ProductController(IProductServiceInterface productService)
         {
             _productService = productService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<List<Product>>> GetAll()
+        [HttpGet("getallproducts")]
+        public async Task<ActionResult<List<Product>>> GetProducts()
         {
-            return Ok(await _productService.GetAll());
+            var result = await _productService.GetProductsAsync();
+            return Ok(result);
         }
     }
 }

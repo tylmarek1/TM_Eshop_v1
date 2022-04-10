@@ -2,6 +2,7 @@ global using Microsoft.EntityFrameworkCore;
 global using TM_Eshop_v1.Shared;
 global using TM_Eshop_v1.Server.Data.DataContext;
 global using TM_Eshop_v1.Server.Services.ProductService;
+global using TM_Eshop_v1.Server.Services.CategoryService;
 using Microsoft.AspNetCore.ResponseCompression;
 
 
@@ -16,7 +17,8 @@ builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-builder.Services.AddScoped<ProductServiceInterface, ProductService>();
+builder.Services.AddScoped<IProductServiceInterface, ProductService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
