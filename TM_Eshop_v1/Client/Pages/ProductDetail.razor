@@ -30,7 +30,7 @@ else
     {
         message = "Loading products for you... bruh";
 
-        var result = await ProductService.GetProducts(ProId);
+        var result = await ProductService.GetProduct(Id);
         if (!result.Success)
         {
             message = result.Message;
