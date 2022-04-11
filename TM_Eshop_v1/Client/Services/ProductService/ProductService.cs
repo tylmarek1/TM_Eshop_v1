@@ -13,6 +13,12 @@
 
         public event Action ProductChanged;
 
+        public async Task<ServiceResponce<Product>> GetProduct(int proId)
+        {
+            var result = await _http.GetFromJsonAsync<ServiceResponce<Product>>($"api/product/{proId}");
+            return result;
+        }
+
         public async Task GetProducts(string? catUrl = null)
         {
             var results = catUrl == null?

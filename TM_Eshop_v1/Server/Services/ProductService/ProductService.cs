@@ -8,6 +8,23 @@
         {
             _context = context;
         }
+
+        public async Task<ServiceResponce<Product>> GetProductAsync(int proId)
+        {
+            var responce = new ServiceResponce<Product>();
+            var product = await _context.Products.FindAsync(proId);
+            if (product == null)
+            {
+                responce.Success = false;
+                responce.Message = "Wrong path or maybe error lol.";
+            }
+            else
+            {
+                responce.Data = product;
+            }
+            return responce;
+        }
+
         public async Task<ServiceResponce<List<Product>>> GetProductsAsync()
         {
             var responce = new ServiceResponce<List<Product>> 

@@ -1,8 +1,8 @@
 ﻿@inject IProductServiceInterface ProductService
 
-@if(ProductService.Products.Count <= 0)
+@if(ProductService.Products == null || ProductService.Products.Count == 0)
 {
-    <span>Loading...</span>
+    <span>Loading Products... or Error</span>      
 }
 else
 {
@@ -10,7 +10,9 @@ else
         @foreach (var product in ProductService.Products)
         {
             <div>
+                <a href="product/@product.ProId">
                 <h4>@product.Name</h4>
+                </a>
                 <img src="@product.ImageUrl">
                 <p>@product.Price Kč</p>
             </div>
@@ -19,5 +21,12 @@ else
 }
 
 @code {
-    protected override async Task OnInitializedAsync() => await ProductService.GetProducts();
+    protected override void OnInitializedAsync()
+    {
+        ProductService.ProductChanged += StateHasChanged;
+    }
+    public void Dispose()
+    {
+        ProductService.ProductChanged -= StateHasChanged;
+    }
 }

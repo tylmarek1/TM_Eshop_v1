@@ -1,0 +1,17 @@
+﻿@page "/products/{catUrl}"
+@inject IProductServiceInterface ProductService
+
+<PageTitle>TM Eshop - Category</PageTitle>
+
+<ProductList />
+
+@code 
+{
+    [Parameter]
+    public string? CatUrl { get; set; } = null;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        await ProductService.GetProducts(CatUrl);
+    }
+}
