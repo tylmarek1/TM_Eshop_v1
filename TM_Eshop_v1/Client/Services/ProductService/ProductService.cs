@@ -8,13 +8,20 @@
         {
             _http = http;
         }
+
         public List<Product> Products { get; set; } = new List<Product>();
 
-        public async Task GetProducts()
+        public event Action ProductChanged;
+
+        public async Task GetProducts(string? catUrl = null)
         {
-            var results = await _http.GetFromJsonAsync<ServiceResponce<List<Product>>>("api/product/getallproducts");
+            var results = catUrl == null?
+                await _http.GetFromJsonAsync<ServiceResponce<List<Product>>>("api/product/getallproducts"): 
+                await _http.GetFromJsonAsync<ServiceResponce<List<Product>>>($"api/product/category/{catUrl}");
             if (results != null && results.Data != null)
                 Products = results.Data;
+
+            ProductChanged.Invoke();
         }
     }
 }

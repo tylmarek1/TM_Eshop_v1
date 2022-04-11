@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TM_Eshop_v1.Server", "TM_Eshop_v1\Server\TM_Eshop_v1.Server.csproj", "{35FB84AE-465C-4822-AF82-6A67483DBF81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TM_Eshop_v1.Server", "TM_Eshop_v1\Server\TM_Eshop_v1.Server.csproj", "{35FB84AE-465C-4822-AF82-6A67483DBF81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TM_Eshop_v1.Client", "TM_Eshop_v1\Client\TM_Eshop_v1.Client.csproj", "{16A32C02-BD49-462B-9353-ECEFEEB22FAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TM_Eshop_v1.Client", "TM_Eshop_v1\Client\TM_Eshop_v1.Client.csproj", "{16A32C02-BD49-462B-9353-ECEFEEB22FAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TM_Eshop_v1.Shared", "TM_Eshop_v1\Shared\TM_Eshop_v1.Shared.csproj", "{9FE25493-4CE7-477E-8648-741621008532}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TM_Eshop_v1.Shared", "TM_Eshop_v1\Shared\TM_Eshop_v1.Shared.csproj", "{9FE25493-4CE7-477E-8648-741621008532}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -2,7 +2,8 @@
 {
     public interface IProductServiceInterface
     {
+        event Action ProductChanged;
         List<Product> Products { get; set; }
-        Task GetProducts();
+        Task GetProducts(string? catUrl = null);
     }
 }

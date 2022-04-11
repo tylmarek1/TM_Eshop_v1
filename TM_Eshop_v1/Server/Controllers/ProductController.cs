@@ -15,9 +15,16 @@ namespace TM_Eshop_v1.Server.Controllers
         }
 
         [HttpGet("getallproducts")]
-        public async Task<ActionResult<List<Product>>> GetProducts()
+        public async Task<ActionResult<ServiceResponce<List<Product>>>> GetProducts()
         {
             var result = await _productService.GetProductsAsync();
+            return Ok(result);
+        }
+
+        [HttpGet("category/{catUrl}")]
+        public async Task<ActionResult<ServiceResponce<List<Product>>>> GetProductsByCategory(string catUrl)
+        {
+            var result = await _productService.GetProductsByCategory(catUrl);
             return Ok(result);
         }
     }

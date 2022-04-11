@@ -3,5 +3,6 @@
     public interface IProductServiceInterface
     {
         Task<ServiceResponce<List<Product>>> GetProductsAsync();
+        Task<ServiceResponce<List<Product>>> GetProductsByCategory(string catUrl);
     }
 }

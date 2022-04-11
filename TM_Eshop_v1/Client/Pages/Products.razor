@@ -1,28 +1,5 @@
 ﻿@page "/products"
-@inject IProductServiceInterface ProductService
 
-<PageTitle>Products</PageTitle>
+<PageTitle>TM Eshop - Products</PageTitle>
 
-<h3>Products</h3>
-
-@if(ProductService.Products.Count <= 0)
-{
-    <span>Loading...</span>
-}
-else
-{
-    <div>
-        @foreach (var product in ProductService.Products)
-        {
-            <div>
-                <h4>@product.Name</h4>
-                <img src="@product.ImageUrl">
-                <p>@product.Price Kč</p>
-            </div>
-        }
-    </div>
-}
-
-@code {
-    protected override async Task OnInitializedAsync() => await ProductService.GetProducts();
-}
+<ProductList />

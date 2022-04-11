@@ -16,5 +16,17 @@
             };
             return responce;
         }
+
+        public async Task<ServiceResponce<List<Product>>> GetProductsByCategory(string catUrl)
+        {
+            var responce = new ServiceResponce<List<Product>>
+            {
+                Data = await _context.Products
+                .Where(p => p.Kategorie.CatUrl.ToLower()
+                .Equals(catUrl.ToLower()))
+                .ToListAsync()
+            };
+            return responce;
+        }
     }
 }
