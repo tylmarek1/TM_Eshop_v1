@@ -10,6 +10,7 @@
         }
 
         public List<Product> Products { get; set; } = new List<Product>();
+        public string Message { get; set; } = "Produkty se načítají...";
 
         public event Action ProductChanged;
 
@@ -28,6 +29,16 @@
                 Products = results.Data;
 
             ProductChanged.Invoke();
+        }
+
+        public async Task Search(string searchString)
+        {
+            var result = await _http.GetFromJsonAsync<ServiceResponce<List<Product>>>($"api/product/search/{searchString}");
+            if (result != null && result.Data != null)
+                Products = result.Data;
+            if (Products.Count == 0)
+                Message = "Tady nic není...";
+            ProductChanged?.Invoke();
         }
     }
 }

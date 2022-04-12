@@ -1,0 +1,32 @@
+﻿@inject NavigationManager NavigationManager
+@inject IProductServiceInterface ProductService
+
+<div>
+<input type="search" placeholder="search" @bind-value="searchString" @bind-value:event="oninput" @onkeyup="Keyboard" @ref="userSearch" />
+<button @onclick="SearchPro">Search</button>
+</div>
+
+@code {
+    private string searchString = string.Empty;
+    protected ElementReference userSearch;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await userSearch.FocusAsync();
+        }
+    }
+    public void SearchPro()
+    {
+        NavigationManager.NavigateTo($"products/search/{searchString}");
+    }
+    public async Task Keyboard(KeyboardEventArgs keyInput)
+    {
+        if (keyInput.Key == null || keyInput.Key.Equals("Enter"))
+        {
+            SearchPro();
+        }
+    }
+
+}

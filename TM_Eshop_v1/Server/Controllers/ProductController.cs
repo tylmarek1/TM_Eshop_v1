@@ -26,12 +26,16 @@ namespace TM_Eshop_v1.Server.Controllers
             var result = await _productService.GetProductAsync(proId);
             return Ok(result);
         }
-
-
         [HttpGet("category/{catUrl}")]
         public async Task<ActionResult<ServiceResponce<List<Product>>>> GetProductsByCategory(string catUrl)
         {
             var result = await _productService.GetProductsByCategory(catUrl);
+            return Ok(result);
+        }
+        [HttpGet("search/{searchString}")]
+        public async Task<ActionResult<ServiceResponce<List<Product>>>> Search(string searchString)
+        {
+            var result = await _productService.Search(searchString);
             return Ok(result);
         }
     }
