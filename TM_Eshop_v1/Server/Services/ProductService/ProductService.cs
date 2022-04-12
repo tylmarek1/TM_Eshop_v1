@@ -39,9 +39,21 @@
             var responce = new ServiceResponce<List<Product>>
             {
                 Data = await _context.Products
-                .Where(p => p.Kategorie.CatUrl.ToLower()
+                .Where(parametr => parametr.Kategorie.CatUrl.ToLower()
                 .Equals(catUrl.ToLower()))
                 .ToListAsync()
+            };
+            return responce;
+        }
+
+        public async Task<ServiceResponce<List<Product>>> Search(string searchString)
+        {
+            var responce = new ServiceResponce<List<Product>>
+            {
+                Data = await _context.Products
+                    .Where(parametr => parametr.Name.ToLower()
+                    .Contains(searchString.ToLower()))
+                    .ToListAsync()
             };
             return responce;
         }
