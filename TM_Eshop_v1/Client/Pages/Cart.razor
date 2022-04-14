@@ -1,0 +1,44 @@
+﻿@page "/cart"
+@inject ICartService CartService
+
+@if (cartPro == null || cartPro.Count == 0)
+{
+    <span>@message</span>
+}
+else
+{
+    <div>
+        @foreach (var product in cartPro)
+        {
+            <div>
+                <a href="/product/@product.ProId">
+                    <div>@product.Name</div>
+                    <div>@product.Price</div>
+                </a>
+            </div>
+        }
+        <div>
+            @cartPro.Sum(product => @product.Price)
+        </div>
+    </div>
+}
+
+
+@code {
+    List<CartResponce> cartPro = null;
+    string message = "Načítáme Váš košík...";
+
+    protected override async Task OnInitializedAsync()
+    {
+        var prod = await CartService.GetProInCart();
+        if (prod.Count == 0)
+        {
+            message = "Košík je prázdný.";
+            cartPro = new List<CartResponce>();
+        }
+        else
+        {
+            cartPro = await CartService.GetProInCart();
+        }
+    }
+}

@@ -1,0 +1,8 @@
+Main:
+#1AC5FD - blue
+#F8F8F8 - white
+
+#121619 - black
+
+Support:
+#FF686B - red
