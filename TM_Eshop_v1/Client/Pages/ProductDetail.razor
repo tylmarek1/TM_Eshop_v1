@@ -1,5 +1,6 @@
 ﻿@page "/product/{id:int}"
 @inject IProductServiceInterface ProductService
+@inject ICartService CartService
 
 @if (product == null)
 {
@@ -17,6 +18,7 @@ else
             <h4>@product.Price</h4>
         </div>
     </div>
+    <button @onclick="AddToCart">Do kosiku</button>
 }
 
 @code {
@@ -39,5 +41,14 @@ else
         {
             product = result.Data;
         }
+    }
+
+    private async Task AddToCart()
+    {
+        var cartItem = new CartItem
+            {
+                ProductId = product.ProId
+            };
+        await CartService.AddToCart(cartItem);
     }
 }
