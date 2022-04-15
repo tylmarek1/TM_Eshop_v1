@@ -1,0 +1,55 @@
+﻿@page "/cart"
+@inject ICartService CartService
+
+@if (cartProducts == null || cartProducts.Count == 0)
+{
+    <span>@message</span>
+}
+else
+{
+    <table>
+        <tr>
+            <th>ProId</th>
+            <th>Produkt</th>
+            <th>Cena</th>
+        </tr>
+        @foreach (var product in cartProducts)
+        {
+            <tr>
+                <td>@product.ProductId</td>
+                <td>
+                    <a href="/product/@product.ProductId">
+                        @product.Name
+                    </a>
+                </td>
+                <td>@product.Price</td>
+            </tr>           
+        }
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                Total(@cartProducts.Count): @cartProducts.Sum(product => @product.Price)
+            </td>
+        </tr>
+    </table>
+}
+
+
+@code {
+    List<CartResponce> cartProducts = null;
+    string message = "Kosik se nacita...";
+
+    protected override async Task OnInitializedAsync()
+    {
+        if ((await CartService.GetCartItems()).Count == 0)
+        {
+            message = "V kosiku nejsou produkty";
+            cartProducts = new List<CartResponce>();
+        }
+        else
+        {
+            cartProducts = await CartService.GetCartProducts();
+        }
+    }
+}

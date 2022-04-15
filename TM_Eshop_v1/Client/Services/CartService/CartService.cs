@@ -3,10 +3,12 @@
     public class CartService : ICartService
     {
         private readonly ILocalStorageService _localStorage;
+        private readonly HttpClient _http;
 
-        public CartService(ILocalStorageService localStorage)
+        public CartService(ILocalStorageService localStorage, HttpClient http)
         {
             _localStorage = localStorage;
+            _http = http;
         }
         public event Action OnChange;
 
@@ -24,6 +26,14 @@
             var cart = await _localStorage.GetItemAsync<List<CartItem>>("cart");
             if (cart == null) { cart = new List<CartItem>(); }
             return cart;
+        }
+
+        public async Task<List<CartResponce>> GetCartProducts()
+        {
+            var cartItems = await _localStorage.GetItemAsync<List<CartItem>>("cart");
+            var responce = await _http.PostAsJsonAsync("api/cart/products", cartItems);
+            var cartProducts = await responce.Content.ReadFromJsonAsync<ServiceResponce<List<CartResponce>>>();
+            return cartProducts.Data;
         }
     }
 }
