@@ -12,6 +12,7 @@ else
             <th>ProId</th>
             <th>Produkt</th>
             <th>Cena</th>
+            <th>Odstranit</th>
         </tr>
         @foreach (var product in cartProducts)
         {
@@ -23,6 +24,11 @@ else
                     </a>
                 </td>
                 <td>@product.Price</td>
+                <td>
+                    <button @onclick="@(() => RemoveFromCart(product.ProductId))">
+                        odstranit
+                    </button>
+                </td>
             </tr>           
         }
         <tr>
@@ -42,6 +48,20 @@ else
 
     protected override async Task OnInitializedAsync()
     {
+        if ((await CartService.GetCartItems()).Count == 0)
+        {
+            message = "V kosiku nejsou produkty";
+            cartProducts = new List<CartResponce>();
+        }
+        else
+        {
+            cartProducts = await CartService.GetCartProducts();
+        }
+    }
+
+    private async Task RemoveFromCart(int productId)
+    {
+        await CartService.RemoveFromCart(productId);
         if ((await CartService.GetCartItems()).Count == 0)
         {
             message = "V kosiku nejsou produkty";

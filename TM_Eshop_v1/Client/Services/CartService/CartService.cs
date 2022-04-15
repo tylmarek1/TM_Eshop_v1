@@ -35,5 +35,18 @@
             var cartProducts = await responce.Content.ReadFromJsonAsync<ServiceResponce<List<CartResponce>>>();
             return cartProducts.Data;
         }
+
+        public async Task RemoveFromCart(int productId)
+        {
+            var cart = await _localStorage.GetItemAsync<List<CartItem>>("cart");
+            if (cart == null) { return; }
+            var cartItem = cart.Find(f => f.ProductId == productId);
+            if (cartItem != null) 
+            { 
+                cart.Remove(cartItem);
+                await _localStorage.SetItemAsync("cart", cart);
+                OnChange.Invoke();
+            }
+        }
     }
 }
