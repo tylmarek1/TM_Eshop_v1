@@ -1,0 +1,31 @@
+﻿@page "/checkout"
+@inject IOrderService OrderService
+
+    <EditForm Model="buyer" OnSubmit="PlaceOrder">
+        <div>
+            <label>Jmeno</label>
+            <InputText @bind-Value="buyer.Name"></InputText>
+        </div>
+        <div>
+            <label>Mail</label>
+            <InputText @bind-Value="buyer.Mail"></InputText>
+        </div>
+        <div>
+            <label>Adresa</label>
+            <InputText @bind-Value="buyer.Adress"></InputText>
+        </div>
+        <button type="submit">Objednat</button>
+    </EditForm>
+
+
+@code {
+    Order order = new Order{ Buyer = new Buyer()};
+
+    Buyer buyer = new Buyer();
+
+    void PlaceOrder()
+    {
+        Console.WriteLine("order placed");
+    }
+
+}
