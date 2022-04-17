@@ -1,0 +1,95 @@
+﻿@page "/checkout"
+@inject ICartService CartService
+@inject IOrderService OrderService
+@inject Blazored.LocalStorage.ILocalStorageService localStore
+
+@if (cartProducts == null || cartProducts.Count == 0)
+{
+    <span>@message</span>
+}
+else
+{
+    <table>
+        <tr>
+            <th>ProId</th>
+            <th>Produkt</th>
+            <th>Cena</th>
+        </tr>
+        @foreach (var product in cartProducts)
+        {
+            <tr>
+                <td>@product.ProductId</td>
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+
+            </tr>           
+        }
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                Total(@cartProducts.Count): @cartProducts.Sum(product => @product.Price)
+            </td>
+        </tr>
+    </table>
+
+    
+}
+    <hr />
+<EditForm Model="buyer" OnValidSubmit="HandleSubmit">
+        <DataAnnotationsValidator />
+        <label></label>
+        <InputText @bind-Value="buyer.Name"></InputText>
+        <label></label>
+        <InputText @bind-Value="buyer.Mail"></InputText>
+        <label></label>
+        <InputText @bind-Value="buyer.AdressCity"></InputText>
+        <label></label>
+        <InputText @bind-Value="buyer.AdressStreet"></InputText>
+        <button type="submit">Objednat</button>
+    </EditForm>
+
+
+@code {
+    List<CartResponce> cartProducts = null;
+    List<Order> orders = new List<Order>();
+
+    string message = "Kosik se nacita...";
+
+    string noteContent;
+
+    private Buyer buyer = new Buyer();
+
+    Order order = new Order();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if ((await CartService.GetCartItems()).Count == 0)
+        {
+            message = "V kosiku nejsou produkty";
+            cartProducts = new List<CartResponce>();
+        }
+        else
+        {
+            cartProducts = await CartService.GetCartProducts();
+        }
+        await OrderService.GetOrder();
+    }
+
+    private async Task HandleSubmit()
+    {
+        var order = new Order()
+        {
+            Buyer = buyer.Name,
+            Mail = buyer.Mail,
+            AdressCity = buyer.AdressCity,
+            AdressStreet = buyer.AdressStreet,
+            CartItems = string.Join(",", cartProducts.ToList()),
+            OrderTime = DateTime.Now
+        };
+
+        await OrderService.CreateOrder(order);
+        noteContent = "";
+        await localStore.ClearAsync();
+    }
+}

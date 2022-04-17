@@ -4,6 +4,7 @@ global using TM_Eshop_v1.Client.Services.CategoryService;
 global using System.Net.Http.Json;
 global using Blazored.LocalStorage;
 global using TM_Eshop_v1.Client.Services.CartService;
+global using TM_Eshop_v1.Client.Services.OrderService;
 
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -21,5 +22,6 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 builder.Services.AddScoped<IProductServiceInterface, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 await builder.Build().RunAsync();

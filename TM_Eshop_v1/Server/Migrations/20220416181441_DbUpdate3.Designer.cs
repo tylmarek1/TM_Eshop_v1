@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TM_Eshop_v1.Server.Data.DataContext;
 
@@ -11,9 +12,10 @@ using TM_Eshop_v1.Server.Data.DataContext;
 namespace TM_Eshop_v1.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20220416181441_DbUpdate3")]
+    partial class DbUpdate3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,11 +32,7 @@ namespace TM_Eshop_v1.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BuyerId"), 1L, 1);
 
-                    b.Property<string>("AdressCity")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AdressStreet")
+                    b.Property<string>("Adress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -49,6 +47,24 @@ namespace TM_Eshop_v1.Server.Migrations
                     b.HasKey("BuyerId");
 
                     b.ToTable("Buyers");
+                });
+
+            modelBuilder.Entity("TM_Eshop_v1.Shared.CartItem", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"), 1L, 1);
+
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ProductId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("CartItem");
                 });
 
             modelBuilder.Entity("TM_Eshop_v1.Shared.Category", b =>
@@ -80,30 +96,15 @@ namespace TM_Eshop_v1.Server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"), 1L, 1);
 
-                    b.Property<string>("AdressCity")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AdressStreet")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Buyer")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CartItems")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Mail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("BuyerId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("OrderTime")
                         .HasColumnType("datetime2");
 
                     b.HasKey("OrderId");
+
+                    b.HasIndex("BuyerId");
 
                     b.ToTable("Orders");
                 });
@@ -153,6 +154,24 @@ namespace TM_Eshop_v1.Server.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("TM_Eshop_v1.Shared.CartItem", b =>
+                {
+                    b.HasOne("TM_Eshop_v1.Shared.Order", null)
+                        .WithMany("CartItems")
+                        .HasForeignKey("OrderId");
+                });
+
+            modelBuilder.Entity("TM_Eshop_v1.Shared.Order", b =>
+                {
+                    b.HasOne("TM_Eshop_v1.Shared.Buyer", "Buyer")
+                        .WithMany()
+                        .HasForeignKey("BuyerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Buyer");
+                });
+
             modelBuilder.Entity("TM_Eshop_v1.Shared.Product", b =>
                 {
                     b.HasOne("TM_Eshop_v1.Shared.Category", "Kategorie")
@@ -162,6 +181,11 @@ namespace TM_Eshop_v1.Server.Migrations
                         .IsRequired();
 
                     b.Navigation("Kategorie");
+                });
+
+            modelBuilder.Entity("TM_Eshop_v1.Shared.Order", b =>
+                {
+                    b.Navigation("CartItems");
                 });
 #pragma warning restore 612, 618
         }
