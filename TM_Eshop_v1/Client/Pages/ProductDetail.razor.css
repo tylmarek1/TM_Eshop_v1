@@ -1,0 +1,50 @@
+﻿.oneprod {
+    display: flex;
+    padding-top: 3rem;
+}
+    .oneprod img {
+        flex: 1;
+        padding: 3rem;
+        max-width: 40vw;
+        max-height: 100%;
+    }
+.prodinfo {
+    flex: 2;
+    font-size: 1.6rem;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+}
+.prodinfo h3 {
+    font-size: 2.4rem;
+}
+.prodinfo h4 {
+    font-size: 2.4rem;
+    color: var(--mainc);
+}
+.prodinfo-1 {
+    flex: 1;
+}
+.prodinfo-2 {
+    flex: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.prodinfo-2 p {
+    display: block;
+}
+.prodinfo-3 {
+    flex: 1;
+    display:flex;
+    flex-direction:column;
+    align-items: flex-end;
+    padding-right: 3rem;
+}
+.prodinfo-3 button {
+    padding: 1rem 2rem;
+}
+    .prodinfo-3 button:hover {
+        background-color: var(--mainc);
+        color: var(--mainw);
+    }

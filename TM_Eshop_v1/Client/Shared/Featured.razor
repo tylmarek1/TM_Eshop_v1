@@ -1,0 +1,49 @@
+﻿@inject IProductServiceInterface ProductService
+@implements IDisposable
+
+
+<div class="propage">
+    <div class="about">
+        <h1>O našem obchodě</h1>
+        <p>lorem ipsufkjfdsjfdjl dsds jdfjal fj flkdsjlds fdj lj fkl ldsd ffjd dlkf dlkf fj</p>
+    </div>
+    
+    @if(ProductService.Products == null || ProductService.Products.Count == 0)
+{
+    <span>@ProductService.Message</span>      
+}
+else
+{
+    <div class="productsbody">
+        <h1>Featured</h1>
+        @foreach (var product in ProductService.Products){
+            @if (product.ProId.Equals(1512372)){
+                <a href="product/@product.ProId">
+                    <div class="productbox">
+                        <div class="boxname">
+                            <h4>@product.Name</h4>
+                        </div>
+                        <div class="boximg">
+                            <img src="@product.ImageUrl">
+                        </div>
+                        <div class="boxprice">
+                            <p>@product.Price Kč</p>
+                        </div>
+                    </div>
+                </a>
+            }
+        }
+    </div>
+}
+</div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        ProductService.ProductChanged += StateHasChanged;
+    }
+    public void Dispose()
+    {
+        ProductService.ProductChanged -= StateHasChanged;
+    }
+}

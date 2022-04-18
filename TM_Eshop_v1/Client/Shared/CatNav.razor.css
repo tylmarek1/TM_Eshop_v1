@@ -1,0 +1,20 @@
+﻿nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 8rem;
+    background-color: var(--clearw);
+}
+.navOneDiv {
+    font-size: 2rem;
+    flex: 1;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.navOneDiv:hover {
+    background-color: var(--mainw);
+}

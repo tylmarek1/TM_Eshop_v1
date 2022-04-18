@@ -9,6 +9,7 @@
 }
 else
 {
+    <div class="carttable">
     <table>
         <tr>
             <th>ProId</th>
@@ -20,43 +21,62 @@ else
             <tr>
                 <td>@product.ProductId</td>
                 <td>@product.Name</td>
-                <td>@product.Price</td>
-
+                <td>@product.Price&nbspKč</td>
             </tr>           
         }
         <tr>
+            <td colspan="3" class="totalprice">Total(@cartProducts.Count): @cartProducts.Sum(product => @product.Price) Kč</td>
             <td></td>
-            <td></td>
-            <td>
-                Total(@cartProducts.Count): @cartProducts.Sum(product => @product.Price)
-            </td>
         </tr>
     </table>
-
-    
-}
-    <hr />
 <EditForm Model="buyer" OnValidSubmit="HandleSubmit">
         <DataAnnotationsValidator />
-        <label></label>
-        <InputText @bind-Value="buyer.Name"></InputText>
-        <label></label>
-        <InputText @bind-Value="buyer.Mail"></InputText>
-        <label></label>
-        <InputText @bind-Value="buyer.AdressCity"></InputText>
-        <label></label>
-        <InputText @bind-Value="buyer.AdressStreet"></InputText>
-        <button type="submit">Objednat</button>
+        <div class="editformdiv">
+
+            <h2>Informace pro objednávku</h2>
+
+            <div class="textinput">
+            
+                <InputText @bind-Value="buyer.Name" id="fname" placeholder="Jméno" class="form-control form-control-lg"></InputText>
+<!--                <label id="fname" class="label-name"><span class="content-name">Jméno:</span></label> -->
+
+            </div>
+            <div class="textinput">
+            
+                <InputText @bind-Value="buyer.Mail" id="fmail" placeholder="Mail" class="form-control form-control-lg"></InputText>
+<!--                <label id="fmail" class="label-name"><span class="content-name">Mail:</span></label> -->
+
+            </div>
+            <div class="textinput">
+            
+                <InputText @bind-Value="buyer.AdressCity" id="fad1" placeholder="Město" class="form-control form-control-lg"></InputText>
+<!--                <label id="fad1" class="label-name"><span class="content-name">Město:</span></label> -->
+
+            </div>
+            <div class="textinput">
+            
+                <InputText @bind-Value="buyer.AdressStreet" id="fad2" placeholder="Ulice" class="form-control form-control-lg"></InputText>
+<!--                <label id="fad2" class="label-name"><span class="content-name">Ulice:</span></label> -->
+
+            </div>
+            </div>
+        <button class="done" type="submit">Objednat</button>
     </EditForm>
+    </div> 
+}
+    
+
+
 
 
 @code {
     List<CartResponce> cartProducts = null;
     List<Order> orders = new List<Order>();
+    List<string> prolist = new List<string>();
 
     string message = "Kosik se nacita...";
 
-    string noteContent;
+    string items = "";
 
     private Buyer buyer = new Buyer();
 
@@ -71,25 +91,31 @@ else
         }
         else
         {
-            cartProducts = await CartService.GetCartProducts();
+            cartProducts = await CartService.GetCartProducts();     
         }
+
         await OrderService.GetOrder();
     }
 
     private async Task HandleSubmit()
     {
+        foreach (var product2 in cartProducts)
+            {
+                prolist.Add(product2.ProductId.ToString());
+                items = string.Join(",", prolist);
+                
+            }
         var order = new Order()
         {
             Buyer = buyer.Name,
             Mail = buyer.Mail,
             AdressCity = buyer.AdressCity,
             AdressStreet = buyer.AdressStreet,
-            CartItems = string.Join(",", cartProducts.ToList()),
+            CartItems = items,
             OrderTime = DateTime.Now
         };
 
         await OrderService.CreateOrder(order);
-        noteContent = "";
         await localStore.ClearAsync();
     }
 }

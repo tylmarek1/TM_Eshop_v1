@@ -1,0 +1,25 @@
+﻿button {
+    background: none;
+    background-color: var(--mainc);
+    border: none;
+    height: 70%;
+    padding: 0 2rem;
+    font-size: 1.2rem;
+}
+
+span {
+    background-color: var(--subc);
+    padding: 0.25rem 0.5rem;
+    border-radius: 1rem;
+    color: var(--mainw);
+    font-weight: bold;
+    display: inline-block;
+    transform: translate(-50%);
+}
+i {
+    font-size: 5rem;
+    color: var(--mainw)
+}
+i:hover {
+    color: var(--mainb)
+}

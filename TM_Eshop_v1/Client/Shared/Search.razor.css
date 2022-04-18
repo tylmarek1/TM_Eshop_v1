@@ -1,0 +1,26 @@
+﻿.searchdiv {
+    height: 4rem;
+    background-color: var(--mainw);
+    overflow: hidden;
+    display: flex;
+}
+.searchinputdiv{
+    height: 100%;
+    flex: 8;
+}
+.buttondiv {
+    height: 100%;
+    flex: 2;
+}
+input {
+    outline: none;
+    height: 100%;
+    width: 100%;
+    padding: 0 2%;
+    font-size: 1.6rem;
+}
+button {
+    width: 100%;
+    height: 100%;
+    font-size: 1.6rem;
+}

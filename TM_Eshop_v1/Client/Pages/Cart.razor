@@ -3,10 +3,11 @@
 
 @if (cartProducts == null || cartProducts.Count == 0)
 {
-    <span>@message</span>
+    <span class="cartmes">@message</span>
 }
 else
 {
+    <div class="carttable">
     <table>
         <tr>
             <th>ProId</th>
@@ -23,27 +24,25 @@ else
                         @product.Name
                     </a>
                 </td>
-                <td>@product.Price</td>
-                <td>
-                    <button @onclick="@(() => RemoveFromCart(product.ProductId))">
+                <td>@product.Price&nbspKč</td>
+                <td class="deltd">
+                    <button class="del" @onclick="@(() => RemoveFromCart(product.ProductId))">
                         odstranit
                     </button>
                 </td>
             </tr>           
         }
         <tr>
+            <td colspan="3" class="totalprice">Total(@cartProducts.Count): @cartProducts.Sum(product => @product.Price) Kč</td>
             <td></td>
-            <td></td>
-            <td>
-                Total(@cartProducts.Count): @cartProducts.Sum(product => @product.Price)
-            </td>
         </tr>
     </table>
-    <button>
+    <button class="done">
         <a href="checkout">
             <span>Check out</span>
         </a>
     </button>
+    </div>
 }
 
 

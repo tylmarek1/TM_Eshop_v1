@@ -8,17 +8,20 @@
 }
 else
 {
-    <div>
+    <div class="oneprod">
         <img src="@product.ImageUrl" alt="@product.Name" />
-        <div>
-            <h3>@product.Name</h3>
-            <p>@product.EANCode</p>
-            <p>@product.ProducerName</p>
-            <p>@product.DescriptionShort</p>
-            <h4>@product.Price</h4>
+        <div class="prodinfo">
+            <div class="prodinfo-1"><h3>@product.Name</h3></div>    
+            <div class="prodinfo-2"><p>@product.DescriptionShort</p></div>
+            <div class="prodinfo-3">
+                <p>Výrobce: @product.ProducerName</p>
+                <p>EAN: @product.EANCode</p>
+                <h4>@product.Price Kč</h4>
+                <button @onclick="AddToCart">Do košíku</button>
+            </div>
         </div>
     </div>
-    <button @onclick="AddToCart">Do kosiku</button>
+    
 }
 
 @code {

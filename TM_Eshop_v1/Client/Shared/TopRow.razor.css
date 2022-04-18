@@ -1,0 +1,34 @@
+﻿.toprow {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 12rem;
+    background-color: var(--mainc);
+    align-items: center;
+    padding: 0 2rem;
+}
+.shopicon {
+    flex: 1;
+}
+.toprowsearch {
+    flex: 3;
+}
+.toprowcart {
+    flex: 1;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+.darkmodesw {
+    flex: 1;
+}
+.topcartbutton {
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+}
+span {
+    font-size: 3.5rem;
+    font-weight: bold;
+    color: var(--mainw);
+}

@@ -1,9 +1,13 @@
 ﻿@inject NavigationManager NavigationManager
 @inject IProductServiceInterface ProductService
 
-<div>
-<input type="search" placeholder="search" @bind-value="searchString" @bind-value:event="oninput" @onkeyup="Keyboard" @ref="userSearch" />
-<button @onclick="SearchPro">Search</button>
+<div class="searchdiv">
+    <div class="searchinputdiv">
+        <input type="search" id="searchbarid" placeholder="Vyhledat" @bind-value="searchString" @bind-value:event="oninput" @onkeyup="Keyboard" @ref="userSearch" />
+    </div>
+    <div class="buttondiv">
+        <button @onclick="SearchPro">Search</button>
+    </div>
 </div>
 
 @code {
