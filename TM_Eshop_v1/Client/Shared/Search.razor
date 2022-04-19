@@ -23,7 +23,15 @@
     }
     public void SearchPro()
     {
-        NavigationManager.NavigateTo($"products/search/{searchString}");
+        if (searchString == string.Empty)
+        {
+            NavigationManager.NavigateTo($"products");
+        }
+        else
+        {
+           NavigationManager.NavigateTo($"products/search/{searchString}"); 
+        }
+        
     }
     public async Task Keyboard(KeyboardEventArgs keyInput)
     {

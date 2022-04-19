@@ -17,6 +17,7 @@ namespace TM_Eshop_v1.Shared
         public string Mail { get; set; } = string.Empty;
         [Required]
         public string AdressCity { get; set; } = string.Empty;
+        [Required]
         public string AdressStreet { get; set; } = string.Empty;
     }
 }

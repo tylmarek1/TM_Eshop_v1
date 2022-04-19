@@ -15,6 +15,9 @@
     justify-content: space-evenly;
     align-items: center;
 }
+.blankspace {
+    flex: 1;
+}
 .navOneDiv:hover {
     background-color: var(--mainw);
 }

@@ -3,6 +3,8 @@
 @inject IOrderService OrderService
 @inject Blazored.LocalStorage.ILocalStorageService localStore
 
+<PageTitle>TM Eshop - Objednávka</PageTitle>
+
 @if (cartProducts == null || cartProducts.Count == 0)
 {
     <span>@message</span>

@@ -1,16 +1,37 @@
 ﻿.propage {
-    width: 80vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    background-color: var(--mainc);
+}
+.mainpagetitle {
+    width:100%;
+    height: 50vh;
+    background-color: var(--mainc);
     display: flex;
     justify-content: space-around;
-    margin-top: 10rem;
+    align-items: center;
+}
+.mainpagetitle h1 {
+    display: block;
+    font-size: 10rem;
+    color: var(--mainw);
+    font-weight: bolder;
 }
 .about {
     font-size: 2rem;
     padding: 0 5rem;
 }
-.productbody {
+.bestsell {
     display: flex;
     flex-direction: column;
+    background-color: var(--clearw);
+    padding-top: 5rem;
+    padding-left: 5rem;
+    padding-bottom: 5rem;
+}
+.bestsellbody {
+    display: flex;
 }
 .productbox {
     display: flex;
@@ -33,6 +54,12 @@ a:hover {
     padding: 1rem;
     word-wrap: break-word;
 }
+.boxname h4 {
+    font-weight: bold;
+}
+.boxprice p {
+    font-weight: bold;
+}
 
 .boximg {
     flex: 4;
@@ -48,6 +75,7 @@ a:hover {
     display: flex;
     justify-content: flex-end;
     padding-right: 2rem;
+    padding-top: 2rem;
 }
 
 .productbox img {

@@ -1,9 +1,13 @@
 ﻿@page "/cart"
 @inject ICartService CartService
 
+<PageTitle>TM Eshop - Košík</PageTitle>
+
 @if (cartProducts == null || cartProducts.Count == 0)
 {
-    <span class="cartmes">@message</span>
+    <div class="cartmessdiv">
+        <span class="cartmes">@message</span>
+    </div>
 }
 else
 {
@@ -37,11 +41,11 @@ else
             <td></td>
         </tr>
     </table>
-    <button class="done">
         <a href="checkout">
+            <div class="done">
             <span>Objednat</span>
+            </div>
         </a>
-    </button>
     </div>
 }
 
@@ -54,7 +58,7 @@ else
     {
         if ((await CartService.GetCartItems()).Count == 0)
         {
-            message = "V kosiku nejsou produkty";
+            message = "V kosiku nejsou produkty.";
             cartProducts = new List<CartResponce>();
         }
         else
@@ -68,7 +72,7 @@ else
         await CartService.RemoveFromCart(productId);
         if ((await CartService.GetCartItems()).Count == 0)
         {
-            message = "V kosiku nejsou produkty";
+            message = "V kosiku nejsou produkty.";
             cartProducts = new List<CartResponce>();
         }
         else
