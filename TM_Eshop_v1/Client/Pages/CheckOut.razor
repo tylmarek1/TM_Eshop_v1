@@ -21,11 +21,11 @@ else
             <tr>
                 <td>@product.ProductId</td>
                 <td>@product.Name</td>
-                <td>@product.Price&nbspKč</td>
+                <td>@product.Price.ToString("N2", CultureInfo.CreateSpecificCulture("en-US"))&nbspKč</td>
             </tr>           
         }
         <tr>
-            <td colspan="3" class="totalprice">Total(@cartProducts.Count): @cartProducts.Sum(product => @product.Price) Kč</td>
+            <td colspan="3" class="totalprice">Total(@cartProducts.Count): @cartProducts.Sum(product => @product.Price).ToString("N2", CultureInfo.CreateSpecificCulture("en-US")) Kč</td>
             <td></td>
         </tr>
     </table>

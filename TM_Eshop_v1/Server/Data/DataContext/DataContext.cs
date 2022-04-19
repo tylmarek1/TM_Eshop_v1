@@ -1,6 +1,4 @@
-﻿
-
-namespace TM_Eshop_v1.Server.Data.DataContext
+﻿namespace TM_Eshop_v1.Server.Data.DataContext
 {
     public class DataContext : DbContext
     {

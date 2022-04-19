@@ -16,7 +16,7 @@ else
             <div class="prodinfo-3">
                 <p>Výrobce: @product.ProducerName</p>
                 <p>EAN: @product.EANCode</p>
-                <h4>@product.Price Kč</h4>
+                <h4>@product.Price.ToString("N2", CultureInfo.CreateSpecificCulture("en-US")) Kč</h4>
                 <button @onclick="AddToCart">Do košíku</button>
             </div>
         </div>
@@ -33,7 +33,7 @@ else
 
     protected override async Task OnParametersSetAsync()
     {
-        message = "Loading products for you... bruh";
+        message = "Loading products for you...";
 
         var result = await ProductService.GetProduct(Id);
         if (!result.Success)

@@ -16,7 +16,7 @@
             if (product == null)
             {
                 responce.Success = false;
-                responce.Message = "Wrong path or maybe error lol.";
+                responce.Message = "Wrong path or maybe error.";
             }
             else
             {

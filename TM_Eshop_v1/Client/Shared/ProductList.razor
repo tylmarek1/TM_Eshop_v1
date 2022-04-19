@@ -20,7 +20,7 @@ else
                         <img src="@product.ImageUrl">
                     </div>
                     <div class="boxprice">
-                        <p>@product.Price Kč</p>
+                        <p>@product.Price.ToString("N2", CultureInfo.CreateSpecificCulture("en-US")) Kč</p>
                     </div>
                 </div>
                 </a>

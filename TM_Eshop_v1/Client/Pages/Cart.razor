@@ -24,7 +24,7 @@ else
                         @product.Name
                     </a>
                 </td>
-                <td>@product.Price&nbspKč</td>
+                <td>@product.Price.ToString("N2", CultureInfo.CreateSpecificCulture("en-US"))&nbspKč</td>
                 <td class="deltd">
                     <button class="del" @onclick="@(() => RemoveFromCart(product.ProductId))">
                         odstranit
@@ -33,13 +33,13 @@ else
             </tr>           
         }
         <tr>
-            <td colspan="3" class="totalprice">Total(@cartProducts.Count): @cartProducts.Sum(product => @product.Price) Kč</td>
+            <td colspan="3" class="totalprice">Total(@cartProducts.Count): @cartProducts.Sum(product => @product.Price).ToString("N2", CultureInfo.CreateSpecificCulture("en-US")) Kč</td>
             <td></td>
         </tr>
     </table>
     <button class="done">
         <a href="checkout">
-            <span>Check out</span>
+            <span>Objednat</span>
         </a>
     </button>
     </div>
