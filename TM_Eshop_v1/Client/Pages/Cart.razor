@@ -52,13 +52,13 @@ else
 
 @code {
     List<CartResponce> cartProducts = null;
-    string message = "Kosik se nacita...";
+    string message = "Košík se nacita...";
 
     protected override async Task OnInitializedAsync()
     {
         if ((await CartService.GetCartItems()).Count == 0)
         {
-            message = "V kosiku nejsou produkty.";
+            message = "V košíku nejsou produkty.";
             cartProducts = new List<CartResponce>();
         }
         else
@@ -72,7 +72,7 @@ else
         await CartService.RemoveFromCart(productId);
         if ((await CartService.GetCartItems()).Count == 0)
         {
-            message = "V kosiku nejsou produkty.";
+            message = "V košíku nejsou produkty.";
             cartProducts = new List<CartResponce>();
         }
         else
