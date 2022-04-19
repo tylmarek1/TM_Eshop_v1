@@ -100,11 +100,11 @@ else
     private async Task HandleSubmit()
     {
         foreach (var product2 in cartProducts)
-            {
-                prolist.Add(product2.ProductId.ToString());
-                items = string.Join(",", prolist);
-                
-            }
+        {
+            prolist.Add(product2.ProductId.ToString());
+            items = string.Join(",", prolist);
+
+        }
         var order = new Order()
         {
             Buyer = buyer.Name,
@@ -116,6 +116,6 @@ else
         };
 
         await OrderService.CreateOrder(order);
-        await localStore.ClearAsync();
+        
     }
 }
