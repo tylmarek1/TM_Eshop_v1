@@ -37,7 +37,7 @@ else
             </tr>           
         }
         <tr>
-            <td colspan="3" class="totalprice">Total(@cartProducts.Count): @cartProducts.Sum(product => @product.Price).ToString("N2", CultureInfo.CreateSpecificCulture("en-US")) Kč</td>
+            <td colspan="3" class="totalprice">Celkem (@cartProducts.Count): @cartProducts.Sum(product => @product.Price).ToString("N2", CultureInfo.CreateSpecificCulture("en-US")) Kč</td>
             <td></td>
         </tr>
     </table>
